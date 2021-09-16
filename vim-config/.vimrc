@@ -37,7 +37,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline'
 Plug 'Yggdroot/indentLine'
 Plug 'w0ng/vim-hybrid'
 Plug 'preservim/nerdtree'
