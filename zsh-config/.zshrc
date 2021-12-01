@@ -152,3 +152,6 @@ FD_ROOT=/home/wcj/tools/fd-v8.2.1-x86_64
 export PATH=$PATH:$FD_ROOT/
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# 启用ruby2.5
+source /opt/rh/rh-ruby25/enable

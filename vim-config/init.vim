@@ -12,7 +12,6 @@ set cursorline
 set colorcolumn=80
 set encoding=utf-8
 syntax on
-let g:python3_host_prog = "C:/Users/wcj/Miniconda3/python.exe"
 
 set background=dark
 colorscheme hybrid
