@@ -154,20 +154,11 @@ export PATH=$PATH:$FD_ROOT/
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 # 启用ruby2.5
 source /opt/rh/rh-ruby25/enable
-=======
-=======
->>>>>>> Stashed changes
 export GOPROXY=https://goproxy.cn
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 export RTE_SDK=/home/wcj/dpdk-stable-18.11.11
 export RET_TARGET=x86_64-native-linuxapp-gcc
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
