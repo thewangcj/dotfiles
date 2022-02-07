@@ -1,72 +1,53 @@
-set number
-set nocompatible
-set noerrorbells
-set showmatch
-set ignorecase
-set incsearch
-set novisualbell
-set tabstop=4
-set autowrite
-set ruler
-set cursorline
-set colorcolumn=80
-set encoding=utf-8
-syntax on
+"======================================================================
+"
+" init.vim - initialize config
+"
+" Created by skywind on 2018/05/30
+" Last Modified: 2018/05/30 18:26:34
+"
+"======================================================================
 
-set background=dark
-colorscheme hybrid
+" 防止重复加载
+if get(s:, 'loaded', 0) != 0
+	finish
+else
+	let s:loaded = 1
+endif
 
-let mapleader=','
-inoremap <leader>w <Esc>:w<cr>
+" 取得本文件所在的目录
+let s:home = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
-inoremap jj <Esc>
+" 定义一个命令用来加载文件
+command! -nargs=1 LoadScript exec 'so '.s:home.'/'.'<args>'
 
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+" 将 vim-init 目录加入 runtimepath
+exec 'set rtp+='.s:home
 
-noremap <leader>v :NERDTreeFind<cr>
-noremap <leader>g :NERDTreeToggle<cr>
-let NERDTreeShowHidden=1
-let NERDTreeIgnore = [
-	\ '\.git$', '\.hg$', '\.svn$','\.stversion$','\.pyc$','\.pyo$',
-	\ '\.swp$','\.DS_Store$','\.__pycache__$','\.egg-info$','\.ropeprojects$',
-	\ ]
+" 将 ~/.vim 目录加入 runtimepath (有时候 vim 不会自动帮你加入）
+set rtp+=~/.vim
 
-call plug#begin('~/.vim/plugged')
 
-Plug 'mhinz/vim-startify'
-Plug 'vim-airline/vim-airline'
-Plug 'Yggdroot/indentLine'
-Plug 'w0ng/vim-hybrid'
-Plug 'preservim/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+"----------------------------------------------------------------------
+" 模块加载
+"----------------------------------------------------------------------
 
-Plug 'easymotion/vim-easymotion'
-nmap ss <Plug>(easymotion-s2)
+" 加载基础配置
+LoadScript init/init-basic.vim
 
-Plug 'tpope/vim-surround'
-Plug 'junegunn/fzf', {'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'brooth/far.vim'
-Plug 'vim-airline/vim-airline'
+" 加载扩展配置
+LoadScript init/init-config.vim
 
-Plug 'python-mode/python-mode', {'for': 'python', 'branch': 'develop'}
-let g:pymode_python = 'python3'
-let g:pymode_trim_whitespace = 1
-let g:pymode_doc = 1
-let g:pymode_doc_bind = 'K'
-let g:pymode_rope_goto_definition_bind = "<C-[>"
-let g:pymode_lint = 1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint']
-let g:pymode_options_max_line_length = 120
+" 设定 tabsize
+LoadScript init/init-tabsize.vim
 
-Plug 'sbdchd/neoformat'
-Plug 'dense-analysis/ale'
-Plug 'tpope/vim-commentary'
+" 插件加载
+LoadScript init/init-plugins.vim
 
-call plug#end()
+" 界面样式
+LoadScript init/init-style.vim
+
+" 自定义按键
+LoadScript init/init-keymaps.vim
+
+
 
