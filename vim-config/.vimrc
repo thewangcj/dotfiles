@@ -33,7 +33,7 @@ let NERDTreeIgnore = [
 	\ '\.swp$','\.DS_Store$','\.__pycache__$','\.egg-info$','\.ropeprojects$',
 	\ ]
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/vim-config/plugged')
 
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'

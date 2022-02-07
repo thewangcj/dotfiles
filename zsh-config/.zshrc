@@ -124,10 +124,11 @@ alias gs='git status'
 alias v="vim"
 alias ll="ls -lh"
 alias lla="ls -lah"
-
-alias all_porxy="export ALL_PROXY="http://10.0.74.44:7890""
-alias egph="git config --global http.proxy 'socks5://10.0.74.44:7890'"
-alias egphs="git config --global https.proxy 'socks5://10.0.74.44:7890'"
+alias all_porxy="export ALL_PROXY="http://127.0.0.1:7890""
+wsl_ip=$(hostname -I)
+wsl_ip=${wsl_ip%*.*}
+alias egphs="git config --global https.proxy 'socks5://${wsl_ip}.1:7890'"
+alias egph="git config --global http.proxy 'socks5://${wsl_ip}:7890'"
 alias dgp="git config --global --unset http.proxy&git config --global --unset https.proxy"
 
 ## 安装 zsh-syntax-highlighting 不同发行版安装位置不同修改路径
@@ -155,3 +156,9 @@ export PATH=$PATH:$FD_ROOT/
 
 # 启用ruby2.5
 source /opt/rh/rh-ruby25/enable
+export GOPROXY=https://goproxy.cn
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+export RTE_SDK=/home/wcj/dpdk-stable-18.11.11
+export RET_TARGET=x86_64-native-linuxapp-gcc
