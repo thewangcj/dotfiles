@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="/home/wcj/.oh-my-zsh"
 
@@ -125,11 +122,6 @@ alias v="vim"
 alias ll="ls -lh"
 alias lla="ls -lah"
 alias all_porxy="export ALL_PROXY="http://127.0.0.1:7890""
-wsl_ip=$(hostname -I)
-wsl_ip=${wsl_ip%*.*}
-alias egphs="git config --global https.proxy 'socks5://${wsl_ip}.1:7890'"
-alias egph="git config --global http.proxy 'socks5://${wsl_ip}:7890'"
-alias dgp="git config --global --unset http.proxy&git config --global --unset https.proxy"
 
 ## 安装 zsh-syntax-highlighting 不同发行版安装位置不同修改路径
 # source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -138,27 +130,34 @@ alias dgp="git config --global --unset http.proxy&git config --global --unset ht
 # source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ## 修改提示字符颜色
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=cyan"
-export DESTDIR=/home/wcj/tools/dpdk
 export RTE_TARGET=x86_64-native-linuxapp-gcc
-export RTE_SDK=/home/wcj/tools/dpdk
+export RTE_SDK=$HOME/tools/dpdk
 
-CMAKE_ROOT=/home/wcj/tools/cmake-3.20.5-linux-x86_64
-export PATH=$PATH:$CMAKE_ROOT/bin/
+# CMAKE
+CMAKE_ROOT=$HOME/tools/cmake-3.20.5-linux-x86_64
 
-[[ -s /home/wcj/.autojump/etc/profile.d/autojump.sh ]] && source /home/wcj/.autojump/etc/profile.d/autojump.sh
+# autojump
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 
         autoload -U compinit && compinit -u
 
-FD_ROOT=/home/wcj/tools/fd-v8.2.1-x86_64
-export PATH=$PATH:$FD_ROOT/
+# fd
+FD_ROOT=$HOME/tools/fd-v8.2.1-x86_64
 
+# fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # 启用ruby2.5
-source /opt/rh/rh-ruby25/enable
+# source /opt/rh/rh-ruby25/enable
+
+# Go
 export GOPROXY=https://goproxy.cn
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-export RTE_SDK=/home/wcj/dpdk-stable-18.11.11
-export RET_TARGET=x86_64-native-linuxapp-gcc
+
+# PKG_CONFIG
+export PKG_CONFIG_PATH="$HOME.local/lib64/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+export PATH=$FD_ROOT:$CMAKE_ROOT/bin:$HOME/.rvm/bin:$PATH
