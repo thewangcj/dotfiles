@@ -34,7 +34,7 @@ noremap <C-h> <left>
 noremap <C-j> <down>
 noremap <C-k> <up>
 noremap <C-l> <right>
-inoremap <C-h> <left>
+" inoremap <C-h> <left>
 inoremap <C-j> <down>
 inoremap <C-k> <up>
 inoremap <C-l> <right>
@@ -43,7 +43,7 @@ inoremap <C-l> <right>
 "----------------------------------------------------------------------
 " 命令模式的快速移动
 "----------------------------------------------------------------------
-cnoremap <c-h> <left>
+" cnoremap <c-h> <left>
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 cnoremap <c-l> <right>
