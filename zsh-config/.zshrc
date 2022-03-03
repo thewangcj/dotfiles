@@ -67,7 +67,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages colorize cp man command-not-found sudo ubuntu archlinux zsh-navigation-tools z extract history-substring-search autojump python zsh-autosuggestions)
+plugins=(git colored-man-pages colorize cp man command-not-found sudo ubuntu zsh-navigation-tools z extract history-substring-search autojump python zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,32 +123,32 @@ alias ll="ls -lh"
 alias lla="ls -lah"
 alias all_porxy="export ALL_PROXY="http://127.0.0.1:7890""
 
-## 安装 zsh-syntax-highlighting 不同发行版安装位置不同修改路径
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-## 安装 zsh-autosuggestions 不同发行版安装位置不同修改路径
-# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ## 修改提示字符颜色
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=cyan"
 export RTE_TARGET=x86_64-native-linuxapp-gcc
 export RTE_SDK=$HOME/tools/dpdk
 
+if [  -n "$(uname -a | grep centos)" ]; then
 # CMAKE
-CMAKE_ROOT=$HOME/tools/cmake-3.20.5-linux-x86_64
+	CMAKE_ROOT=$HOME/tools/cmake-3.20.5-linux-x86_64
+# fd
+	FD_ROOT=$HOME/tools/fd-v8.2.1-x86_64
+fi
+
 
 # autojump
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 
         autoload -U compinit && compinit -u
 
-# fd
-FD_ROOT=$HOME/tools/fd-v8.2.1-x86_64
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+if [  -n "$(uname -a | grep centos)" ]; then
 # 启用ruby2.5
-# source /opt/rh/rh-ruby25/enable
+	source /opt/rh/rh-ruby25/enable
+fi
 
 # Go
 export GOPROXY=https://goproxy.cn
@@ -160,4 +160,8 @@ export PKG_CONFIG_PATH="$HOME.local/lib64/pkgconfig:/usr/local/lib/pkgconfig:$PK
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
-export PATH=$FD_ROOT:$CMAKE_ROOT/bin:$HOME/.rvm/bin:$PATH
+if [  -n "$(uname -a | grep centos)" ]; then
+	export PATH=$FD_ROOT:$CMAKE_ROOT/bin:$HOME/.rvm/bin:$PATH
+else
+	export PATH=$HOME/.rvm/bin:$PATH
+fi
