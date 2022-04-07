@@ -125,8 +125,6 @@ alias all_porxy="export ALL_PROXY="http://127.0.0.1:7890""
 
 ## 修改提示字符颜色
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=cyan"
-export RTE_TARGET=x86_64-native-linuxapp-gcc
-export RTE_SDK=$HOME/tools/dpdk
 
 if [  -n "$(uname -a | grep centos)" ]; then
 # CMAKE
@@ -135,12 +133,15 @@ if [  -n "$(uname -a | grep centos)" ]; then
 	FD_ROOT=$HOME/tools/fd-v8.2.1-x86_64
 fi
 
+## export DESTDIR=/home/wcj/tools/dpdk
+# export RTE_TARGET=x86_64-native-linuxapp-gcc
+# export RTE_SDK=/home/wcj/tools/dpdk
+
 
 # autojump
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 
         autoload -U compinit && compinit -u
-
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -153,8 +154,6 @@ fi
 # Go
 export GOPROXY=https://goproxy.cn
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-
 # PKG_CONFIG
 export PKG_CONFIG_PATH="$HOME.local/lib64/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
@@ -165,3 +164,10 @@ if [  -n "$(uname -a | grep centos)" ]; then
 else
 	export PATH=$HOME/.rvm/bin:$PATH
 fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# export PATH="$PATH:$HOME/.rvm/bin"
+
+export GOPROXY=https://goproxy.cn
+
+export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0 # in WSL 2
