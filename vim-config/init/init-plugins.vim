@@ -119,6 +119,9 @@ if index(g:bundle_group, 'basic') >= 0
 	" Git 支持
 	Plug 'tpope/vim-fugitive'
 
+	" which key"
+	Plug 'liuchengxu/vim-which-key'
+
 	" 使用 ALT+E 来选择窗口
 	nmap <m-e> <Plug>(choosewin)
 
