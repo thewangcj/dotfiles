@@ -9,5 +9,6 @@ return {
         require('mini.tabline').setup()
         require('mini.statusline').setup()
         require('mini.git').setup()
+        require('mini.trailspace').setup() -- 可以将多余的空白字符显示出来
     end
 }

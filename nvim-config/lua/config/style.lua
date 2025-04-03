@@ -5,10 +5,9 @@ vim.o.background = "dark"
 vim.o.termguicolors = true
 vim.opt.termguicolors = true
 -- 启用真彩色支持
-vim.opt.termguicolors = true       
--- 不可见字符的显示，这里只把空格显示为一个点
-vim.o.list = true
-vim.o.listchars = "space:·"
+vim.opt.termguicolors = true
+-- 不可见字符的显示
+vim.o.list = false
 
 -- split window 从下边和右边出现
 vim.o.splitbelow = true
@@ -22,7 +21,7 @@ vim.wo.cursorline = true
 -- 显示左侧图标指示列
 vim.wo.signcolumn = "yes"
 -- 右侧参考线，超过表示代码太长了，考虑换行
-vim.wo.colorcolumn = "80"
+vim.wo.colorcolumn = "120"
 -- 命令行高为2，提供足够的显示空间
 vim.o.cmdheight = 2
 

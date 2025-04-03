@@ -44,11 +44,13 @@ vim.o.incsearch = true
 -- 备份设置
 ----------------------------------------------------------------------
 -- 禁止创建备份文件
-vim.o.backup = true
-vim.o.writebackup = true
-vim.o.swapfile = false
+vim.o.backup = false
+vim.o.writebackup = false
+vim.o.swapfile = true
 -- smaller updatetime
 vim.o.updatetime = 300
+-- 设置 timeoutlen 为等待键盘快捷键连击时间500毫秒，可根据需要设置
+vim.o.timeoutlen = 500
 -- 禁用 undo文件
 vim.o.undofile = false
 
