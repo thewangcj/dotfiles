@@ -25,6 +25,10 @@ return {
                     node_decremental = "<BS>", -- 减量选择
                 },
             },
+            -- 启用代码缩进
+            indent = {
+                enable = true,
+            },
         })
     end
 }

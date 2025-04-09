@@ -12,15 +12,13 @@ end
 -- 例如：map("n", "<leader>w", ":w<CR>", make_opts("保存文件"))
 
 -- 窗口管理快捷键映射
--- 取消 s 默认功能
-map("n", "s", "", make_opts(""))
 -- windows 分屏快捷键
-map("n", "sv", ":vsp<CR>", make_opts("垂直分屏"))
-map("n", "sh", ":sp<CR>", make_opts("水平分屏"))
+map("n", "<leader>sv", ":vsp<CR>", make_opts("垂直分屏"))
+map("n", "<leader>sh", ":sp<CR>", make_opts("水平分屏"))
 -- 关闭当前
-map("n", "sc", "<C-w>c", make_opts("关闭当前"))
+map("n", "<leader>sc", "<C-w>c", make_opts("关闭当前"))
 -- 关闭其他
-map("n", "so", "<C-w>o", make_opts("关闭其他"))
+map("n", "<leader>so", "<C-w>o", make_opts("关闭其他"))
 -- Alt + hjkl  窗口之间跳转
 map("n", "<A-h>", "<C-w>h", make_opts("移动到左边窗口"))
 map("n", "<A-j>", "<C-w>j", make_opts("移动到下边窗口"))
@@ -28,17 +26,13 @@ map("n", "<A-k>", "<C-w>k", make_opts("移动到上边窗口"))
 map("n", "<A-l>", "<C-w>l", make_opts("移动到右边窗口"))
 
 -- 左右比例控制
-map("n", "<C-Left>", ":vertical resize -2<CR>", make_opts("减少宽度"))
-map("n", "<C-Right>", ":vertical resize +2<CR>", make_opts("增加宽度"))
-map("n", "s,", ":vertical resize -20<CR>", make_opts("减少宽度"))
-map("n", "s.", ":vertical resize +20<CR>", make_opts("增加宽度"))
+map("n", "<leader>s,", ":vertical resize -20<CR>", make_opts("减少宽度"))
+map("n", "<leader>s.", ":vertical resize +20<CR>", make_opts("增加宽度"))
 -- 上下比例
-map("n", "sj", ":resize +10<CR>", make_opts("增加高度"))
-map("n", "sk", ":resize -10<CR>", make_opts("减少高度"))
-map("n", "<C-Down>", ":resize +2<CR>", make_opts("增加高度"))
-map("n", "<C-Up>", ":resize -2<CR>", make_opts("减少高度"))
+map("n", "<leader>sj", ":resize +10<CR>", make_opts("增加高度"))
+map("n", "<leader>sk", ":resize -10<CR>", make_opts("减少高度"))
 -- 等比例
-map("n", "s=", "<C-w>=", make_opts("等宽"))
+map("n", "<leader>s=", "<C-w>=", make_opts("等宽"))
 
 -- Terminal相关
 map("n", "<leader>t", ":sp | terminal<CR>", make_opts("打开终端"))
