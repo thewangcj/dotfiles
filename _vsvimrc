@@ -1,0 +1,29 @@
+let mapleader=' '
+" 高亮搜索内容
+set hlsearch
+
+" 查找输入时动态增量显示查找结果
+set incsearch
+" 搜索时忽略大小写
+set ignorecase
+" 智能搜索大小写判断，默认忽略大小写，除非搜索内容包含大写字母
+set smartcase
+"显示当前命令
+set showcmd
+
+"normal mode
+:nnoremap U <C-r>
+" 跳转行前行末
+:nnoremap H ^
+:nnoremap L $
+" 查找引用 goto reference
+:nnoremap gu :vsc Edit.FindAllReferences<CR>
+" 查找定义 goto definition
+:nnoremap gd :vsc Edit.GotoDefinition<CR>
+
+" 打开资源管理器：show path
+:nnoremap <Leader>sp :vsc File.OpenFolder<CR>
+
+"Insert Mode
+" 退出i mode
+:inoremap jk <esc>
