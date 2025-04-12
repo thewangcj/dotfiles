@@ -65,7 +65,7 @@ vim.opt.shiftwidth = 2
 vim.bo.shiftwidth = 2
 
 -- 当文件被外部程序修改时，自动加载
-vim.optpt.autoread = true
+vim.opt.autoread = true
 -- 禁止折行
 vim.wo.wrap = false
 -- 光标在行首尾时<Left><Right>可以跳到下一行
@@ -83,7 +83,7 @@ vim.g.completeopt = "menu,menuone,noselect,noinsert"
 -- 补全增强
 vim.opt.wildmenu = true
 -- Dont' pass messages to |ins-completin menu|
-vim.opt.shortmess = vim.opt.shortmess .. 'c'
+vim.opt.shortmess:append('c')
 -- 补全最多显示5行
 vim.opt.pumheight = 5
 
