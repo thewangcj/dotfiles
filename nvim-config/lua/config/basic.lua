@@ -1,91 +1,72 @@
--- basic.lua
+-- ============================================================
+-- 基础设置
+-- ============================================================
 
 ----------------------------------------------------------------------
--- 编码设置
+-- 编码设置（兼容中文环境）
 ----------------------------------------------------------------------
--- utf8
 vim.g.encoding = "UTF-8"
-vim.opt.fileencoding = 'utf-8'
--- 打开文件时自动尝试下面顺序的编码
+vim.opt.fileencoding = "utf-8"
+-- 打开文件时自动尝试以下编码顺序
 vim.opt.fileencodings = "ucs-bom,utf-8,gbk,gb18030,big5,euc-jp,latin1"
 
 ----------------------------------------------------------------------
--- 基础设置
+-- 缩进设置
 ----------------------------------------------------------------------
--- 自动缩进：新行对齐当前行
-vim.opt.autoindent = true
-vim.bo.autoindent = true
-vim.opt.smartindent = true
--- 打开 C/C++ 语言缩进优化
-vim.opt.cindent = true
--- Windows 禁用 ALT 操作菜单（使得 ALT 可以用到 Vim里）
+vim.opt.autoindent = true    -- 自动缩进：新行对齐当前行
+vim.opt.smartindent = true   -- 智能缩进
+vim.opt.cindent = true       -- C/C++ 语言缩进优化
+
+----------------------------------------------------------------------
+-- 编辑行为
+----------------------------------------------------------------------
+-- Windows 下禁用 ALT 操作菜单（释放 Alt 键给 Vim 使用）
 vim.opt.winaltkeys = "no"
--- 关闭自动换行
-vim.opt.wrap = false
--- 打开功能键超时检测（终端下功能键为一串 ESC 开头的字符串）
-vim.opt.ttimeout = true
--- 设置 timeoutlen 为等待键盘快捷键连击时间100毫秒
-vim.opt.timeoutlen = 100
--- 显示光标位置
-vim.opt.ruler = true
+vim.opt.wrap = false         -- 禁止自动换行
+vim.opt.ttimeout = true      -- 功能键超时检测（终端下需要）
+vim.opt.timeoutlen = 500     -- 快捷键连击等待时间（毫秒）
+vim.opt.ruler = true         -- 显示光标位置
 
 ----------------------------------------------------------------------
 -- 搜索设置
 ----------------------------------------------------------------------
--- 搜索大小写不敏感，除非包含大写
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
--- 高亮搜索内容
-vim.opt.hlsearch = true
--- 边输入边搜索
-vim.opt.incsearch = true
+vim.opt.ignorecase = true    -- 搜索大小写不敏感
+vim.opt.smartcase = true     -- 包含大写字母时自动区分大小写
+vim.opt.hlsearch = true      -- 高亮搜索结果
+vim.opt.incsearch = true     -- 边输入边搜索
 
 ----------------------------------------------------------------------
 -- 备份设置
 ----------------------------------------------------------------------
--- 禁止创建备份文件
-vim.opt.backup = false
-vim.opt.writebackup = false
-vim.opt.swapfile = true
--- smaller updatetime
-vim.opt.updatetime = 300
--- 设置 timeoutlen 为等待键盘快捷键连击时间500毫秒，可根据需要设置
-vim.opt.timeoutlen = 500
--- 禁用 undo文件
-vim.opt.undofile = false
+vim.opt.backup = false       -- 禁止创建备份文件
+vim.opt.writebackup = false  -- 禁止写入备份
+vim.opt.swapfile = true      -- 启用交换文件（崩溃恢复用）
+vim.opt.updatetime = 300     -- 更快的 CursorHold 触发时间（毫秒）
+vim.opt.undofile = false     -- 禁用持久化撤销文件
 
 ----------------------------------------------------------------------
--- 其他设置
+-- 滚动与光标
 ----------------------------------------------------------------------
--- jkhl 移动时光标周围保留8行
-vim.opt.scrolloff = 8
-vim.opt.sidescrolloff = 8
--- >> << 时移动长度
-vim.opt.shiftwidth = 2
-vim.bo.shiftwidth = 2
+vim.opt.scrolloff = 8        -- 光标上下至少保留 8 行
+vim.opt.sidescrolloff = 8    -- 左右至少保留 8 列
 
--- 当文件被外部程序修改时，自动加载
-vim.opt.autoread = true
--- 禁止折行
-vim.wo.wrap = false
--- 光标在行首尾时<Left><Right>可以跳到下一行
-vim.opt.whichwrap = '<,>,[,]'
--- 允许隐藏被修改过的buffer
-vim.opt.hidden = true
--- 鼠标支持
-vim.opt.mouse = "a"
+----------------------------------------------------------------------
+-- 文件与缓冲区
+----------------------------------------------------------------------
+vim.opt.autoread = true                -- 文件被外部修改时自动加载
+vim.opt.whichwrap = "<,>,[,]"          -- 行首尾按方向键可跨行
+vim.opt.hidden = true                  -- 允许隐藏未保存的缓冲区
+vim.opt.mouse = "a"                    -- 启用鼠标支持
 
 ----------------------------------------------------------------------
 -- 补全设置
 ----------------------------------------------------------------------
--- 自动补全不自动选中
-vim.g.completeopt = "menu,menuone,noselect,noinsert"
--- 补全增强
-vim.opt.wildmenu = true
--- Dont' pass messages to |ins-completin menu|
-vim.opt.shortmess:append('c')
--- 补全最多显示5行
-vim.opt.pumheight = 5
+vim.opt.completeopt = "menu,menuone,noselect,noinsert"  -- 补全行为
+vim.opt.wildmenu = true                 -- 命令行补全增强
+vim.opt.shortmess:append("c")           -- 补全时不显示多余消息
+vim.opt.pumheight = 10                  -- 补全菜单最多显示 10 行
 
--- python provider
-vim.g.python3_host_prog = 'C:/Users/changjiewang/tools/nvim-win64/.venv/Scripts/python.exe'
+----------------------------------------------------------------------
+-- Python 解释器路径（用于 Neovim Python 插件支持）
+----------------------------------------------------------------------
+vim.g.python3_host_prog = "C:/Users/changjiewang/tools/nvim-win64/.venv/Scripts/python.exe"

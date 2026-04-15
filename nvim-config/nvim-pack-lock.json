@@ -1,0 +1,32 @@
+{
+  "plugins": {
+    "gitsigns.nvim": {
+      "rev": "8d82c240f190fc33723d48c308ccc1ed8baad69d",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "mini.nvim": {
+      "rev": "27a3e747a4e603b4121f5759e74020430ec7b7d5",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "neo-tree.nvim": {
+      "rev": "aa3500f7038a32ed4b0b765cd458b9c429062cac",
+      "src": "https://github.com/nvim-neo-tree/neo-tree.nvim"
+    },
+    "nui.nvim": {
+      "rev": "de740991c12411b663994b2860f1a4fd0937c130",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
+    "nvim-treesitter": {
+      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "nvim-web-devicons": {
+      "rev": "c72328a5494b4502947a022fe69c0c47e53b6aa6",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    }
+  }
+}

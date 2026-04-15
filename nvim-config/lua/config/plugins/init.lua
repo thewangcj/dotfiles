@@ -1,0 +1,56 @@
+-- ============================================================
+-- 插件管理入口 - 使用 Neovim 0.12 原生 vim.pack
+--
+-- 常用操作：
+--   安装插件：首次启动自动提示，按 y 确认
+--   更新插件：:lua vim.pack.update()
+--   删除插件：先移除配置，再 :lua vim.pack.del({ '插件名' })
+--   查看状态：:lua vim.pack.update(nil, { offline = true })
+-- ============================================================
+
+local is_vscode = vim.g.is_vscode
+
+-- 插件安装钩子（必须在 vim.pack.add 之前定义）
+-- 使用 pcall 防止旧版本 Neovim 不支持 PackChanged 事件
+pcall(vim.api.nvim_create_autocmd, "PackChanged", {
+  callback = function(ev)
+    local name = ev.data.spec.name
+    local kind = ev.data.kind
+    if name == "nvim-treesitter" and (kind == "install" or kind == "update") then
+      if not ev.data.active then vim.cmd.packadd("nvim-treesitter") end
+      vim.cmd("TSUpdate")
+    end
+  end,
+})
+
+-- ============================================================
+-- VSCode 模式：仅加载编辑增强插件
+-- ============================================================
+if is_vscode then
+  vim.pack.add({
+    "https://github.com/nvim-mini/mini.nvim",
+  })
+  require("config.plugins.editing")
+  return
+end
+
+-- ============================================================
+-- 完整模式：加载所有插件
+-- ============================================================
+vim.pack.add({
+  "https://github.com/nvim-mini/mini.nvim",
+  "https://github.com/nvim-tree/nvim-web-devicons",
+  "https://github.com/nvim-lua/plenary.nvim",    -- neo-tree 依赖
+  "https://github.com/MunifTanjim/nui.nvim",     -- neo-tree 依赖
+  "https://github.com/nvim-neo-tree/neo-tree.nvim",
+  "https://github.com/lewis6991/gitsigns.nvim",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+})
+
+-- 按功能模块加载配置
+require("config.plugins.editing")
+require("config.plugins.ui")
+require("config.plugins.files")
+require("config.plugins.git")
+require("config.plugins.treesitter")
+require("config.plugins.starter")

@@ -1,31 +1,23 @@
--- style.lua
+-- ============================================================
+-- 外观样式设置
+-- ============================================================
 
--- 样式
-vim.opt.background = "dark"
-vim.opt.termguicolors = true
-vim.opt.termguicolors = true
--- 启用真彩色支持
-vim.opt.termguicolors = true
--- 不可见字符的显示
-vim.opt.list = false
+vim.opt.background = "dark"       -- 深色背景
+vim.opt.termguicolors = true      -- 启用真彩色支持
+vim.opt.list = false              -- 不显示不可见字符
 
--- split window 从下边和右边出现
+-- 分屏行为：新窗口出现在下方和右方
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
--- 使用相对行号
-vim.wo.number = true
-vim.wo.relativenumber = true
--- 高亮所在行
-vim.wo.cursorline = true
--- 显示左侧图标指示列
-vim.wo.signcolumn = "yes"
--- 右侧参考线，超过表示代码太长了，考虑换行
-vim.wo.colorcolumn = "120"
--- 命令行高为2，提供足够的显示空间
-vim.opt.cmdheight = 2
+-- 行号与高亮
+vim.wo.number = true              -- 显示行号
+vim.wo.relativenumber = true      -- 相对行号（方便跳转）
+vim.wo.cursorline = true          -- 高亮当前行
+vim.wo.signcolumn = "yes"         -- 始终显示符号列（避免抖动）
+vim.wo.colorcolumn = "120"        -- 第 120 列参考线
 
--- 永远显示 tabline
-vim.opt.showtabline = 2
--- 使用增强状态栏插件后不再需要 vim 的模式提示
-vim.opt.showmode = false
+-- 命令行与标签页
+vim.opt.cmdheight = 1             -- 命令行高度
+vim.opt.showtabline = 2           -- 始终显示标签页栏
+vim.opt.showmode = false          -- 不显示模式（由状态栏插件显示）
