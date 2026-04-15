@@ -1,34 +1,21 @@
 -- ============================================================
 -- Tree-sitter 语法高亮
--- 提供精确的语法高亮，比正则匹配更准确
--- 注意：VSCode 模式下不加载，使用 VSCode 自身的高亮
+-- Neovim 0.12 内置原生 treesitter 支持，无需 nvim-treesitter 插件
+--
+-- 常用操作：
+--   :TSInstall <语言>     安装指定语言的解析器
+--   :TSInstallInfo        查看已安装的解析器
+--   :TSUpdate             更新所有解析器
+--
+-- 注意：安装非内置解析器需要 tree-sitter CLI：
+--   npm install -g tree-sitter-cli
 -- ============================================================
 
-local ok, ts_config = pcall(require, "nvim-treesitter.configs")
-if not ok then return end
+-- Neovim 0.12 默认启用 treesitter 高亮，无需额外配置
+-- 以下语言解析器已内置，开箱即用：
+--   C, C++, Lua, Vim, Vimdoc, Python, Bash, Markdown, JSON 等
 
-ts_config.setup({
-  -- 自动安装以下语言的解析器
-  ensure_installed = {
-    -- C/C++ 和构建工具（C++ / Qt 开发必需）
-    "c", "cpp", "cmake", "make",
-    -- Python
-    "python",
-    -- Lua（Neovim 配置用）
-    "lua", "luadoc",
-    -- Neovim 相关
-    "vim", "vimdoc", "query",
-    -- 数据格式
-    "json", "yaml", "toml",
-    -- 脚本和标记语言
-    "bash", "markdown", "markdown_inline",
-    -- 其他实用语言
-    "diff", "regex", "css",
-  },
-  highlight = {
-    enable = true,          -- 启用基于 Tree-sitter 的语法高亮
-  },
-  indent = {
-    enable = true,          -- 启用基于 Tree-sitter 的智能缩进
-  },
-})
+-- 如果需要安装额外的解析器，可以在命令模式执行：
+--   :TSInstall cmake make toml yaml css
+-- 或在 Lua 中执行：
+--   vim.cmd("TSInstall cmake")

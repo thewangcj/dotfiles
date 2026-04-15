@@ -10,19 +10,6 @@
 
 local is_vscode = vim.g.is_vscode
 
--- 插件安装钩子（必须在 vim.pack.add 之前定义）
--- 使用 pcall 防止旧版本 Neovim 不支持 PackChanged 事件
-pcall(vim.api.nvim_create_autocmd, "PackChanged", {
-  callback = function(ev)
-    local name = ev.data.spec.name
-    local kind = ev.data.kind
-    if name == "nvim-treesitter" and (kind == "install" or kind == "update") then
-      if not ev.data.active then vim.cmd.packadd("nvim-treesitter") end
-      vim.cmd("TSUpdate")
-    end
-  end,
-})
-
 -- ============================================================
 -- VSCode 模式：仅加载编辑增强插件
 -- ============================================================
@@ -44,7 +31,6 @@ vim.pack.add({
   "https://github.com/MunifTanjim/nui.nvim",     -- neo-tree 依赖
   "https://github.com/nvim-neo-tree/neo-tree.nvim",
   "https://github.com/lewis6991/gitsigns.nvim",
-  "https://github.com/nvim-treesitter/nvim-treesitter",
 })
 
 -- 按功能模块加载配置
