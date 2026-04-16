@@ -36,6 +36,29 @@ require("mini.statusline").setup({
   use_icons = true,          -- 使用图标（需要 Nerd Font）
 })
 
+-- mini.tabline：顶部标签栏（类似 VSCode 的多标签页）
+-- 显示所有打开的缓冲区，点击或用快捷键切换
+require("mini.tabline").setup({
+  show_icons = true,         -- 显示文件类型图标
+  tabpage = false,           -- 不显示 Vim 原生 tabpage（只显示 buffer）
+})
+
+-- 自定义 tabline：在左侧添加留白，对齐 neo-tree 宽度
+-- Neovim 的 tabline 是全局的，跨越整个窗口顶部
+-- 当 neo-tree 打开时，在左侧填充等宽空格让标签与编辑区对齐
+_G.padded_tabline = function()
+  local padding = ""
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.bo[buf].filetype == "neo-tree" then
+      padding = string.rep(" ", vim.api.nvim_win_get_width(win))
+      break
+    end
+  end
+  return padding .. MiniTabline.make_tabline_string()
+end
+vim.o.tabline = "%!v:lua._G.padded_tabline()"
+
 -- mini.icons：文件类型图标（mini 插件内部使用）
 require("mini.icons").setup()
 

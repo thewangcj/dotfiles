@@ -24,44 +24,41 @@ local function opts(desc)
 end
 
 -- ============================================================
--- 窗口管理
+-- 窗口管理（VSCode 有自己的窗口管理，跳过）
 -- ============================================================
 
--- 分屏操作
-map("n", "<leader>sv", "<C-w>v", opts("垂直分屏"))
-map("n", "<leader>sh", "<C-w>s", opts("水平分屏"))
-map("n", "<leader>sc", "<C-w>c", opts("关闭当前窗口"))
-map("n", "<leader>so", "<C-w>o", opts("关闭其他窗口"))
+if not is_vscode then
+  -- 分屏操作
+  map("n", "<leader>sv", "<C-w>v", opts("垂直分屏"))
+  map("n", "<leader>sh", "<C-w>s", opts("水平分屏"))
+  map("n", "<leader>sc", "<C-w>c", opts("关闭当前窗口"))
+  map("n", "<leader>so", "<C-w>o", opts("关闭其他窗口"))
 
--- Alt + hjkl 在窗口间跳转
-map("n", "<A-h>", "<C-w>h", opts("跳到左边窗口"))
-map("n", "<A-j>", "<C-w>j", opts("跳到下方窗口"))
-map("n", "<A-k>", "<C-w>k", opts("跳到上方窗口"))
-map("n", "<A-l>", "<C-w>l", opts("跳到右边窗口"))
+  -- Alt + hjkl 在窗口间跳转
+  map("n", "<A-h>", "<C-w>h", opts("跳到左边窗口"))
+  map("n", "<A-j>", "<C-w>j", opts("跳到下方窗口"))
+  map("n", "<A-k>", "<C-w>k", opts("跳到上方窗口"))
+  map("n", "<A-l>", "<C-w>l", opts("跳到右边窗口"))
 
--- 窗口大小调整
-map("n", "<leader>s,", ":vertical resize -20<CR>", opts("减少宽度"))
-map("n", "<leader>s.", ":vertical resize +20<CR>", opts("增加宽度"))
-map("n", "<leader>sj", ":resize +10<CR>", opts("增加高度"))
-map("n", "<leader>sk", ":resize -10<CR>", opts("减少高度"))
-map("n", "<leader>s=", "<C-w>=", opts("等宽"))
+  -- 窗口大小调整
+  map("n", "<leader>s,", ":vertical resize -20<CR>", opts("减少宽度"))
+  map("n", "<leader>s.", ":vertical resize +20<CR>", opts("增加宽度"))
+  map("n", "<leader>sj", ":resize +10<CR>", opts("增加高度"))
+  map("n", "<leader>sk", ":resize -10<CR>", opts("减少高度"))
+  map("n", "<leader>s=", "<C-w>=", opts("等宽"))
 
--- ============================================================
--- 终端
--- ============================================================
-
-map("n", "<leader>t", ":sp | terminal<CR>", opts("打开终端"))
-map("n", "<leader>vt", ":vsp | terminal<CR>", opts("垂直分屏打开终端"))
--- 退出终端模式（回到普通模式）
-map("t", "<Esc>", "<C-\\><C-n>", opts("退出终端模式"))
--- 终端模式下 Alt + hjkl 跳转窗口
-map("t", "<A-h>", "<C-\\><C-N><C-w>h", opts("终端：跳到左边窗口"))
-map("t", "<A-j>", "<C-\\><C-N><C-w>j", opts("终端：跳到下方窗口"))
-map("t", "<A-k>", "<C-\\><C-N><C-w>k", opts("终端：跳到上方窗口"))
-map("t", "<A-l>", "<C-\\><C-N><C-w>l", opts("终端：跳到右边窗口"))
+  -- 终端（VSCode 有自己的终端）
+  map("n", "<leader>t", ":sp | terminal<CR>", opts("打开终端"))
+  map("n", "<leader>vt", ":vsp | terminal<CR>", opts("垂直分屏打开终端"))
+  map("t", "<Esc>", "<C-\\><C-n>", opts("退出终端模式"))
+  map("t", "<A-h>", "<C-\\><C-N><C-w>h", opts("终端：跳到左边窗口"))
+  map("t", "<A-j>", "<C-\\><C-N><C-w>j", opts("终端：跳到下方窗口"))
+  map("t", "<A-k>", "<C-\\><C-N><C-w>k", opts("终端：跳到上方窗口"))
+  map("t", "<A-l>", "<C-\\><C-N><C-w>l", opts("终端：跳到右边窗口"))
+end
 
 -- ============================================================
--- 可视模式操作
+-- 可视模式操作（两种模式通用）
 -- ============================================================
 
 -- 缩进后保持选中
@@ -97,28 +94,30 @@ map("n", "<leader>Q", ":qa!<CR>", opts("全部退出"))
 
 if not is_vscode then
   -- neo-tree：文件目录树
-  -- <Leader>e 打开/关闭左侧文件树，并自动定位到当前文件
   map("n", "<leader>e", ":Neotree reveal<CR>", opts("打开文件目录树"))
 
-  -- mini.pick：模糊查找文件（替代 Telescope find_files）
-  map("n", "<C-p>", function()
-    require("mini.pick").builtin.files()
-  end, opts("查找文件"))
+  -- Telescope：模糊查找文件
+  map("n", "<C-p>", "<cmd>Telescope find_files<CR>", opts("查找文件"))
+  -- Telescope：全局搜索
+  map("n", "<C-f>", "<cmd>Telescope live_grep<CR>", opts("全局搜索"))
+  -- Telescope：切换缓冲区
+  map("n", "<leader>b", "<cmd>Telescope buffers<CR>", opts("切换缓冲区"))
+  -- Telescope：最近打开的文件
+  map("n", "<leader>r", "<cmd>Telescope oldfiles<CR>", opts("最近文件"))
 
-  -- mini.pick：全局搜索（替代 Telescope live_grep）
-  map("n", "<C-f>", function()
-    require("mini.pick").builtin.grep_live()
-  end, opts("全局搜索"))
+  -- 缓冲区标签页切换（类似 VSCode 的 Ctrl+Tab / Ctrl+W）
+  map("n", "<Tab>", "<cmd>bnext<CR>", opts("下一个标签"))
+  map("n", "<S-Tab>", "<cmd>bprevious<CR>", opts("上一个标签"))
+  map("n", "<Leader>bc", "<cmd>bdelete<CR>", opts("关闭当前标签"))
 
-  -- mini.pick：切换缓冲区
-  map("n", "<leader>b", function()
-    require("mini.pick").builtin.buffers()
-  end, opts("切换缓冲区"))
-
-  -- mini.extra：最近打开的文件
-  map("n", "<leader>r", function()
-    require("mini.extra").pickers.recent_files()
-  end, opts("最近文件"))
+  -- 插件管理
+  map("n", "<Leader>pu", function()
+    vim.notify("正在更新插件...")
+    vim.schedule(function()
+      vim.pack.update()
+      vim.notify("插件更新完成")
+    end)
+  end, opts("更新插件"))
 end
 
 -- ============================================================

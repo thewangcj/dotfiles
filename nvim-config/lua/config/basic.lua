@@ -59,6 +59,14 @@ vim.opt.hidden = true                  -- 允许隐藏未保存的缓冲区
 vim.opt.mouse = "a"                    -- 启用鼠标支持
 
 ----------------------------------------------------------------------
+-- 终端 Shell 设置
+----------------------------------------------------------------------
+vim.opt.shell = '"C:/Program Files/Git/bin/bash.exe"'
+vim.opt.shellcmdflag = "-c -l -i"
+vim.opt.shellquote = ""
+vim.opt.shellxquote = ""
+
+----------------------------------------------------------------------
 -- 补全设置
 ----------------------------------------------------------------------
 vim.opt.completeopt = "menu,menuone,noselect,noinsert"  -- 补全行为

@@ -1,21 +1,24 @@
 -- ============================================================
--- Tree-sitter 语法高亮
--- Neovim 0.12 内置原生 treesitter 支持，无需 nvim-treesitter 插件
+-- Tree-sitter 解析器管理 - tree-sitter-manager.nvim
 --
--- 常用操作：
---   :TSInstall <语言>     安装指定语言的解析器
---   :TSInstallInfo        查看已安装的解析器
---   :TSUpdate             更新所有解析器
+-- Neovim 0.12 内置 treesitter，但额外语言的解析器需要手动安装
+-- 此插件提供 TUI 界面管理解析器的安装/卸载
 --
--- 注意：安装非内置解析器需要 tree-sitter CLI：
---   npm install -g tree-sitter-cli
+-- 前置要求：
+--   tree-sitter CLI（已下载 tree-sitter.exe）
+--   git
+--   C 编译器（gcc / clang）
+--
+-- 快捷键：<Leader>tp 打开解析器管理面板
+--
+-- 管理面板内操作：
+--   i    安装解析器
+--   u    更新解析器
+--   d    卸载解析器
+--   q    退出
 -- ============================================================
 
--- Neovim 0.12 默认启用 treesitter 高亮，无需额外配置
--- 以下语言解析器已内置，开箱即用：
---   C, C++, Lua, Vim, Vimdoc, Python, Bash, Markdown, JSON 等
+require("tree-sitter-manager").setup()
 
--- 如果需要安装额外的解析器，可以在命令模式执行：
---   :TSInstall cmake make toml yaml css
--- 或在 Lua 中执行：
---   vim.cmd("TSInstall cmake")
+-- <Leader>tp：打开 tree-sitter 解析器管理面板
+vim.keymap.set("n", "<Leader>tp", "<cmd>TSManager<CR>", { desc = "解析器管理" })

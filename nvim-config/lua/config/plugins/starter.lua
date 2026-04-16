@@ -11,8 +11,8 @@ require("mini.starter").setup({
   items = {
     -- 最近使用的文件（最多 8 个）
     require("mini.starter").sections.recent_files(8, false),
-    -- 会话恢复（如果使用 mini.sessions）
-    -- require("mini.starter").sections.sessions(5, true),
+    -- 已保存的会话列表（显示最多 5 个）
+    require("mini.starter").sections.sessions(5, true),
     -- 书签（可自定义常用目录/文件）
     {
       name = "打开文件浏览器",
@@ -21,12 +21,12 @@ require("mini.starter").setup({
     },
     {
       name = "查找文件",
-      action = "lua require('mini.pick').builtin.files()",
+      action = "Telescope find_files",
       section = "快捷操作",
     },
     {
       name = "全局搜索",
-      action = "lua require('mini.pick').builtin.grep_live()",
+      action = "Telescope live_grep",
       section = "快捷操作",
     },
   },

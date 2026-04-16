@@ -52,10 +52,24 @@ require("neo-tree").setup({
   },
 })
 
--- mini.pick：模糊查找器（类似 Telescope / fzf）
--- 内置多种查找器：文件、grep、buffer、帮助标签等
-require("mini.pick").setup()
-
--- mini.extra：扩展功能模块
--- 提供额外的 pickers 和工具（如最近文件、命令历史等）
-require("mini.extra").setup()
+-- Telescope：模糊查找器
+-- 支持文件搜索、全局 grep、缓冲区切换、符号搜索等
+local telescope = require("telescope")
+telescope.setup({
+  defaults = {
+    -- 搜索结果排序策略
+    file_ignore_patterns = { ".git/", "node_modules/" },
+    -- 预览窗口布局
+    layout_config = {
+      horizontal = { preview_width = 0.5 },
+    },
+  },
+  -- 加载 aerial 扩展（符号搜索）
+  extensions = {
+    aerial = {
+      show_nesting = true,   -- 显示符号嵌套层级
+    },
+  },
+})
+-- 加载 aerial 扩展
+telescope.load_extension("aerial")

@@ -31,6 +31,14 @@ vim.pack.add({
   "https://github.com/MunifTanjim/nui.nvim",     -- neo-tree 依赖
   "https://github.com/nvim-neo-tree/neo-tree.nvim",
   "https://github.com/lewis6991/gitsigns.nvim",
+  "https://github.com/stevearc/aerial.nvim",
+  "https://github.com/nvim-telescope/telescope.nvim",
+  "https://github.com/stevearc/conform.nvim",
+  "https://github.com/folke/tokyonight.nvim",
+  "https://github.com/catppuccin/nvim",
+  "https://github.com/rose-pine/neovim",
+  "https://github.com/shaunsingh/nord.nvim",
+  "https://github.com/romus204/tree-sitter-manager.nvim",
 })
 
 -- 按功能模块加载配置
@@ -38,5 +46,8 @@ require("config.plugins.editing")
 require("config.plugins.ui")
 require("config.plugins.files")
 require("config.plugins.git")
+require("config.plugins.symbols")
+require("config.plugins.formatting")
 require("config.plugins.treesitter")
+require("config.plugins.sessions")
 require("config.plugins.starter")
