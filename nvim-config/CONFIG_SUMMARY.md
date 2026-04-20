@@ -191,6 +191,7 @@ Leader 键 = `空格`
 ## 必要工具
 - tree-sitter-cli：用于编译语言高亮 parser, 直接在 https://github.com/tree-sitter/tree-sitter 下载即可
 - ripgrep: 直接在 https://github.com/BurntSushi/ripgrep 下载即可
-- gcc: 编译 parser 时需要
+- gcc: 编译 parser 时需要，使用 mingw 即可
+- clangd：C++ lsp 使用，用 vs 安装即可
 - git: 安装插件时需要
 - im-select.exe 用于自动切换输入法，直接在 https://github.com/daipeihust/im-select/tree/master/win/out/x64 里下载然后添加到环境变量
