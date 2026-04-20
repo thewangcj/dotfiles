@@ -39,6 +39,7 @@ vim.pack.add({
   "https://github.com/rose-pine/neovim",
   "https://github.com/shaunsingh/nord.nvim",
   "https://github.com/romus204/tree-sitter-manager.nvim",
+  "https://github.com/keaising/im-select.nvim",
 })
 
 -- 按功能模块加载配置
@@ -49,5 +50,12 @@ require("config.plugins.git")
 require("config.plugins.symbols")
 require("config.plugins.formatting")
 require("config.plugins.treesitter")
+
+-- LSP（受全局开关控制）
+if vim.g.enable_lsp then
+  require("config.plugins.lsp")
+end
+
+require("config.plugins.im_select")
 require("config.plugins.sessions")
 require("config.plugins.starter")

@@ -57,11 +57,19 @@ require("neo-tree").setup({
 local telescope = require("telescope")
 telescope.setup({
   defaults = {
-    -- 搜索结果排序策略
-    file_ignore_patterns = { ".git/", "node_modules/" },
     -- 预览窗口布局
     layout_config = {
       horizontal = { preview_width = 0.5 },
+    },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--glob", "!.git",
     },
   },
   -- 加载 aerial 扩展（符号搜索）

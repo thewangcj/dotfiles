@@ -1,0 +1,43 @@
+# Clang-Format 配置模板
+# 基于 Google 风格，针对 C++ / Qt 调整
+# 使用方法：复制到项目根目录，根据需要调整
+
+BasedOnStyle: Google
+Language: Cpp
+
+# 缩进宽度
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+AccessModifierOffset: -4
+
+# 大括号风格
+BreakBeforeBraces: Attach
+
+# 行宽
+ColumnLimit: 120
+
+# 指针和引用对齐
+PointerAlignment: Left
+ReferenceAlignment: Left
+DerivePointerAlignment: false
+
+# include 排序
+SortIncludes: CaseInsensitive
+IncludeBlocks: Regroup
+
+# Qt 信号槽连接风格（保持一行）
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortBlocksOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+# 对齐
+AlignAfterOpenBracket: Align
+AlignOperands: Align
+AlignTrailingComments: true
+
+# 其他
+SpaceAfterCStyleCast: false
+SpaceBeforeParens: ControlStatements
+Standard: c++17

@@ -1,0 +1,29 @@
+# EditorConfig 配置模板
+# 使用方法：复制到项目根目录
+# 大多数编辑器和 IDE 原生支持 EditorConfig
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{c,cpp,cc,cxx,h,hpp}]
+indent_style = space
+indent_size = 4
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[*.{lua,json,yaml,yml,toml}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab

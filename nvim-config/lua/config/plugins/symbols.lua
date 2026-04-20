@@ -14,8 +14,8 @@
 -- ============================================================
 
 require("aerial").setup({
-  -- 使用 treesitter 后端（不需要 LSP）
-  backends = { "treesitter" },
+  -- 后端优先级：LSP > treesitter（LSP 关闭时自动回退到 treesitter）
+  backends = vim.g.enable_lsp and { "lsp", "treesitter" } or { "treesitter" },
 
   -- 大纲侧边栏配置
   float = {

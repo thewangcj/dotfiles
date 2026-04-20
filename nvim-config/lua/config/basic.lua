@@ -20,8 +20,10 @@ vim.opt.cindent = true       -- C/C++ 语言缩进优化
 ----------------------------------------------------------------------
 -- 编辑行为
 ----------------------------------------------------------------------
--- Windows 下禁用 ALT 操作菜单（释放 Alt 键给 Vim 使用）
-vim.opt.winaltkeys = "no"
+-- Windows GUI 下禁用 ALT 操作菜单（释放 Alt 键给 Vim 使用）
+if vim.fn.has("win32") == 1 then
+  vim.opt.winaltkeys = "no"
+end
 vim.opt.wrap = false         -- 禁止自动换行
 vim.opt.ttimeout = true      -- 功能键超时检测（终端下需要）
 vim.opt.timeoutlen = 500     -- 快捷键连击等待时间（毫秒）
@@ -59,12 +61,16 @@ vim.opt.hidden = true                  -- 允许隐藏未保存的缓冲区
 vim.opt.mouse = "a"                    -- 启用鼠标支持
 
 ----------------------------------------------------------------------
--- 终端 Shell 设置
+-- 终端 Shell 设置（跨平台适配）
 ----------------------------------------------------------------------
-vim.opt.shell = '"C:/Program Files/Git/bin/bash.exe"'
-vim.opt.shellcmdflag = "-c -l -i"
-vim.opt.shellquote = ""
-vim.opt.shellxquote = ""
+-- Windows：使用 Git Bash（路径含空格需要特殊处理）
+-- macOS/Linux/WSL：使用系统默认 shell，无需额外配置
+if vim.fn.has("win32") == 1 then
+  vim.opt.shell = '"C:/Program Files/Git/bin/bash.exe"'
+  vim.opt.shellcmdflag = "-c -l -i"
+  vim.opt.shellquote = ""
+  vim.opt.shellxquote = ""
+end
 
 ----------------------------------------------------------------------
 -- 补全设置
@@ -74,7 +80,3 @@ vim.opt.wildmenu = true                 -- 命令行补全增强
 vim.opt.shortmess:append("c")           -- 补全时不显示多余消息
 vim.opt.pumheight = 10                  -- 补全菜单最多显示 10 行
 
-----------------------------------------------------------------------
--- Python 解释器路径（用于 Neovim Python 插件支持）
-----------------------------------------------------------------------
-vim.g.python3_host_prog = "C:/Users/changjiewang/tools/nvim-win64/.venv/Scripts/python.exe"
