@@ -1,2 +1,8 @@
 # 保存当前机器的仓库路径，供后续命令使用。
 sourceDir = {{ .chezmoi.sourceDir | quote }}
+
+# 重新初始化时保留本机参数，新机器默认关闭可选功能。
+[data]
+enableLsp = {{ if (get . "enableLsp") }}true{{ else }}false{{ end }}
+enableTreesitter = {{ if (get . "enableTreesitter") }}true{{ else }}false{{ end }}
+nvimBash = {{ get . "nvimBash" | default "" | quote }}

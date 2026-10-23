@@ -1,4 +1,4 @@
-# 新增或删除原始配置文件后，重新生成 chezmoi 部署映射。
+﻿# 新增或删除原始配置文件后，重新生成 chezmoi 部署映射。
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
 $utf8 = New-Object System.Text.UTF8Encoding($false)
@@ -9,6 +9,10 @@ function Add-Mapping($source, $target) {
     [System.IO.Directory]::CreateDirectory((Split-Path -Parent $file)) | Out-Null
     # 模板只引用原始配置，避免维护多份内容。
     $body = '{{ include (joinPath .chezmoi.sourceDir "' + $source + '") }}'
+    # Neovim 入口先读取本机参数，再加载共用配置。
+    if ($source -eq 'nvim-config/init.lua') {
+        $body = '{{ template "nvim-init.lua" . }}'
+    }
     [System.IO.File]::WriteAllText($file, $body, $utf8)
 }
 # 扫描配置目录，跳过说明文档、旧备份和本机运行数据。

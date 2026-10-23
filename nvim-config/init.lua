@@ -13,12 +13,16 @@ vim.g.maplocalleader = " "
 vim.g.is_vscode = vim.g.vscode ~= nil
 
 -- LSP 默认关闭，适用于有第三方程序白名单限制的环境。
--- 确认语言服务器已获准运行并安装后，改为 true 启用跳转定义等功能。
-vim.g.enable_lsp = false
+-- 本机通过 chezmoi 的 enableLsp 参数覆盖默认值。
+if vim.g.enable_lsp == nil then
+  vim.g.enable_lsp = false
+end
 
 -- Tree-sitter 默认关闭，使用内置语法高亮。
--- 确认解析器及编译工具可用后，改为 true 启用解析器管理和符号解析。
-vim.g.enable_treesitter = false
+-- 本机通过 chezmoi 的 enableTreesitter 参数覆盖默认值。
+if vim.g.enable_treesitter == nil then
+  vim.g.enable_treesitter = false
+end
 
 -- 加载基础配置（始终加载）
 require("config.basic")

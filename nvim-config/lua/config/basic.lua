@@ -68,10 +68,14 @@ vim.opt.mouse = "a"                    -- 启用鼠标支持
 ----------------------------------------------------------------------
 -- 终端 Shell 设置（跨平台适配）
 ----------------------------------------------------------------------
--- Windows：默认沿用 Neovim 的 shell；设置 NVIM_BASH 可选择 Git Bash。
+-- Windows：优先使用 chezmoi 本机参数，其次读取 NVIM_BASH 环境变量。
 -- macOS/Linux/WSL：使用系统默认 shell，无需额外配置
-if vim.fn.has("win32") == 1 and vim.env.NVIM_BASH and vim.fn.executable(vim.env.NVIM_BASH) == 1 then
-  vim.opt.shell = '"' .. vim.env.NVIM_BASH .. '"'
+local bash = vim.g.nvim_bash
+if not bash or bash == "" then
+  bash = vim.env.NVIM_BASH
+end
+if vim.fn.has("win32") == 1 and bash and bash ~= "" and vim.fn.executable(bash) == 1 then
+  vim.opt.shell = '"' .. bash .. '"'
   vim.opt.shellcmdflag = "-c"
   vim.opt.shellquote = ""
   vim.opt.shellxquote = ""

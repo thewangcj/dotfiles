@@ -53,17 +53,39 @@ chezmoi apply
 
 ## 安装编辑器依赖
 
+### 每台机器单独设置功能开关
+
+仓库默认关闭 LSP 和 Tree-sitter。执行 `chezmoi edit-config`，在本机 `~/.config/chezmoi/chezmoi.toml` 的 `[data]` 中设置开关，例如仅开启 Tree-sitter：
+
+```toml
+[data]
+enableLsp = false
+enableTreesitter = true
+```
+
+保留已有的 `sourceDir` 和其他设置；若已有 `[data]`，在该节中添加或修改字段，不要重复创建。公司电脑使用 `FSLighting-chezmoi.exe edit-config`。
+
+然后执行 `chezmoi diff`、`chezmoi apply` 并重启 Neovim。chezmoi 会按本机数据生成入口配置，仓库默认值仍然为 `false`。本机配置不提交到 Git，重新执行 `init` 时会保留这两个开关。不要直接修改部署后的 `init.lua`，后续 `apply` 会重新生成它。
+
+### 工具依赖
+
 - **Neovim 0.12+**：现有配置使用 `vim.pack`；各平台先用 `nvim --version` 确认版本。包管理器版本不足时需安装满足要求的版本。
 - **Git、ripgrep**：用于下载插件和 Telescope 搜索。
-- **Tree-sitter CLI、C 编译器（可选）**：Tree-sitter 默认关闭，保留内置语法高亮。需要时将 `nvim-config/init.lua` 中的 `vim.g.enable_treesitter` 改为 `true`，应用配置并重启 Neovim，再用 `<Leader>tp` 管理解析器。编译解析器时需要 CLI 和 C 编译器：Windows 可用 LLVM 或 MinGW，macOS 可安装 Xcode Command Line Tools，WSL2 可安装 build-essential。LSP 和 Tree-sitter 均关闭时，符号大纲及其搜索快捷键也不启用。
-- **clangd、pyright-langserver（可选）**：分别用于 C/C++ 和 Python。LSP 默认关闭，无需安装语言服务器；确认工具已获准运行并安装到 PATH 后，将 `nvim-config/init.lua` 中的 `vim.g.enable_lsp` 改为 `true`，应用配置并重启 Neovim。Qt 的编译数据库、工具链路径放在项目的 CMake / `.clangd` 中。
+- **Tree-sitter CLI、C 编译器（可选）**：Tree-sitter 默认关闭，保留内置语法高亮。需要时将本机 chezmoi 配置 `[data]` 中的 `enableTreesitter` 设为 `true`，应用配置并重启 Neovim，再用 `<Leader>tp` 管理解析器。编译解析器时需要 CLI 和 C 编译器：Windows 可用 LLVM 或 MinGW，macOS 可安装 Xcode Command Line Tools，WSL2 可安装 build-essential。LSP 和 Tree-sitter 均关闭时，符号大纲及其搜索快捷键也不启用。
+- **clangd、pyright-langserver（可选）**：分别用于 C/C++ 和 Python。LSP 默认关闭，无需安装语言服务器；确认工具已获准运行并安装到 PATH 后，将本机 chezmoi 配置 `[data]` 中的 `enableLsp` 设为 `true`，应用配置并重启 Neovim。Qt 的编译数据库、工具链路径放在项目的 CMake / `.clangd` 中。
 - **clang-format、black、stylua**：对应 C/C++、Python、Lua 格式化，按需要安装。
 - **Nerd Font**：在 Windows Terminal、macOS 终端或 GUI 编辑器中选择，供图标显示。
 - **输入法（可选）**：Windows / WSL2 使用 PATH 中的 `im-select.exe`；macOS 使用 `macism`；普通 Linux 使用 fcitx5、fcitx 或 ibus。工具不存在时自动跳过。WSL2 需要启用 Windows 互操作并能找到该 exe。
 - **Vim**：首次打开后执行 `:PlugInstall`。Neovim 首次启动按提示安装插件；完成后执行 `:checkhealth` 检查当前机器依赖。
 - **zsh（可选）**：另行安装 Oh My Zsh 和所需额外插件。不存在的插件会跳过；没有 Oh My Zsh 时仍加载其余 shell 设置。
 
-Windows 默认沿用 Neovim 自身的 shell。需要 Git Bash 时，在启动 Neovim 前设置 `NVIM_BASH` 为 bash.exe 的完整路径，例如 PowerShell：
+Windows 默认沿用 Neovim 自身的 shell。需要 Git Bash 时，在本机 chezmoi 配置现有的 `[data]` 中添加 bash.exe 的完整路径：
+
+```toml
+nvimBash = 'C:\Program Files\Git\bin\bash.exe'
+```
+
+使用单引号可避免 TOML 中的反斜杠转义。执行 `chezmoi apply` 并重启 Neovim 后生效；该路径只保存在本机，重新初始化时会保留。默认值为空字符串。路径未设置时也支持读取 `NVIM_BASH` 环境变量，例如 PowerShell：
 
 ```powershell
 $env:NVIM_BASH = 'C:\Program Files\Git\bin\bash.exe'

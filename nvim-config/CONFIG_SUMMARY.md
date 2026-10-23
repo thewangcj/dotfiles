@@ -2,7 +2,7 @@
 
 ## 环境信息
 
-LSP 默认关闭，适用于公司电脑的第三方程序白名单限制。需要启用时，先确认语言服务器已获准运行并安装，再将 `init.lua` 中的 `vim.g.enable_lsp` 改为 `true`，应用配置并重启 Neovim。
+LSP 默认关闭，适用于公司电脑的第三方程序白名单限制。需要启用时，先确认语言服务器已获准运行并安装，再将本机 chezmoi 配置 `[data]` 中的 `enableLsp` 设为 `true`，应用配置并重启 Neovim。
 
 | 项目 | 值 |
 |------|-----|
@@ -172,7 +172,7 @@ Leader 键 = `空格`
 
 ## Tree-sitter 解析器
 
-Tree-sitter 默认关闭，使用内置语法高亮，不加载解析器管理插件。需要时将 `init.lua` 中的 `vim.g.enable_treesitter` 改为 `true`，应用配置并重启，再用 `<Leader>tp` 手动管理解析器。LSP 和 Tree-sitter 均关闭时，符号大纲和符号搜索也不启用。
+Tree-sitter 默认关闭，使用内置语法高亮，不加载解析器管理插件。需要时将本机 chezmoi 配置 `[data]` 中的 `enableTreesitter` 设为 `true`，应用配置并重启，再用 `<Leader>tp` 手动管理解析器。LSP 和 Tree-sitter 均关闭时，符号大纲和符号搜索也不启用。
 
 可按需要安装以下语言的解析器：
 
