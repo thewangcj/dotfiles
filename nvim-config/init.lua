@@ -12,9 +12,13 @@ vim.g.maplocalleader = " "
 -- VSCode 的 Neovim 插件会自动设置 vim.g.vscode = 1
 vim.g.is_vscode = vim.g.vscode ~= nil
 
--- LSP 开关：设为 true 启用代码智能（跳转定义、查找引用等）
---           设为 false 禁用（只需阅读代码、不需要跳转时可关闭）
-vim.g.enable_lsp = true
+-- LSP 默认关闭，适用于有第三方程序白名单限制的环境。
+-- 确认语言服务器已获准运行并安装后，改为 true 启用跳转定义等功能。
+vim.g.enable_lsp = false
+
+-- Tree-sitter 默认关闭，使用内置语法高亮。
+-- 确认解析器及编译工具可用后，改为 true 启用解析器管理和符号解析。
+vim.g.enable_treesitter = false
 
 -- 加载基础配置（始终加载）
 require("config.basic")

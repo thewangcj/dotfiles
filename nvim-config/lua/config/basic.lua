@@ -2,6 +2,11 @@
 -- 基础设置
 -- ============================================================
 
+-- 使用内置语法高亮，无需下载解析器；VSCode 使用自身的高亮。
+if not vim.g.is_vscode then
+  vim.cmd("syntax enable")
+end
+
 ----------------------------------------------------------------------
 -- 编码设置（兼容中文环境）
 ----------------------------------------------------------------------
@@ -63,11 +68,11 @@ vim.opt.mouse = "a"                    -- 启用鼠标支持
 ----------------------------------------------------------------------
 -- 终端 Shell 设置（跨平台适配）
 ----------------------------------------------------------------------
--- Windows：使用 Git Bash（路径含空格需要特殊处理）
+-- Windows：默认沿用 Neovim 的 shell；设置 NVIM_BASH 可选择 Git Bash。
 -- macOS/Linux/WSL：使用系统默认 shell，无需额外配置
-if vim.fn.has("win32") == 1 then
-  vim.opt.shell = '"C:/Program Files/Git/bin/bash.exe"'
-  vim.opt.shellcmdflag = "-c -l -i"
+if vim.fn.has("win32") == 1 and vim.env.NVIM_BASH and vim.fn.executable(vim.env.NVIM_BASH) == 1 then
+  vim.opt.shell = '"' .. vim.env.NVIM_BASH .. '"'
+  vim.opt.shellcmdflag = "-c"
   vim.opt.shellquote = ""
   vim.opt.shellxquote = ""
 end

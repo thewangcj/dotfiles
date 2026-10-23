@@ -22,34 +22,43 @@ if is_vscode then
 end
 
 -- ============================================================
--- 完整模式：加载所有插件
+-- 完整模式：按功能开关加载插件
 -- ============================================================
-vim.pack.add({
+local plugins = {
   "https://github.com/nvim-mini/mini.nvim",
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-lua/plenary.nvim",    -- neo-tree 依赖
   "https://github.com/MunifTanjim/nui.nvim",     -- neo-tree 依赖
   "https://github.com/nvim-neo-tree/neo-tree.nvim",
   "https://github.com/lewis6991/gitsigns.nvim",
-  "https://github.com/stevearc/aerial.nvim",
   "https://github.com/nvim-telescope/telescope.nvim",
   "https://github.com/stevearc/conform.nvim",
   "https://github.com/folke/tokyonight.nvim",
   "https://github.com/catppuccin/nvim",
   "https://github.com/rose-pine/neovim",
   "https://github.com/shaunsingh/nord.nvim",
-  "https://github.com/romus204/tree-sitter-manager.nvim",
   "https://github.com/keaising/im-select.nvim",
-})
+}
+if vim.g.enable_treesitter then
+  table.insert(plugins, "https://github.com/romus204/tree-sitter-manager.nvim")
+end
+if vim.g.enable_lsp or vim.g.enable_treesitter then
+  table.insert(plugins, "https://github.com/stevearc/aerial.nvim")
+end
+vim.pack.add(plugins)
 
 -- 按功能模块加载配置
 require("config.plugins.editing")
 require("config.plugins.ui")
 require("config.plugins.files")
 require("config.plugins.git")
-require("config.plugins.symbols")
+if vim.g.enable_lsp or vim.g.enable_treesitter then
+  require("config.plugins.symbols")
+end
 require("config.plugins.formatting")
-require("config.plugins.treesitter")
+if vim.g.enable_treesitter then
+  require("config.plugins.treesitter")
+end
 
 -- LSP（受全局开关控制）
 if vim.g.enable_lsp then

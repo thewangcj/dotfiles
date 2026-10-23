@@ -1,0 +1,9 @@
+* text=auto
+*.lua text eol=lf
+*.vim text eol=lf
+*.tmpl text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=lf
+*.md text eol=lf
+.zshrc text eol=lf
+.chezmoiignore text eol=lf

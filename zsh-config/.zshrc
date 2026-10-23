@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/home/wcj/.oh-my-zsh"
+export ZSH="${ZSH:-$HOME/.oh-my-zsh}"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -69,7 +69,15 @@ ZSH_THEME="ys"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git colored-man-pages colorize cp man command-not-found sudo ubuntu zsh-navigation-tools z extract history-substring-search autojump python zsh-autosuggestions)
 
-source $ZSH/oh-my-zsh.sh
+# 只加载当前机器已经安装的插件。
+available_plugins=()
+for plugin in $plugins; do
+  if [[ -d "$ZSH/plugins/$plugin" || -d "${ZSH_CUSTOM:-$ZSH/custom}/plugins/$plugin" ]]; then
+    available_plugins+=($plugin)
+  fi
+done
+plugins=($available_plugins)
+[[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
@@ -155,7 +163,7 @@ fi
 export GOPROXY=https://goproxy.cn
 
 # PKG_CONFIG
-export PKG_CONFIG_PATH="$HOME.local/lib64/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="$HOME/.local/lib64/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
@@ -170,4 +178,6 @@ fi
 
 export GOPROXY=https://goproxy.cn
 
-export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0 # in WSL 2
+# WSLg 会自动设置 DISPLAY；旧版 X Server 的设置请放入 ~/.zshrc.local。
+
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

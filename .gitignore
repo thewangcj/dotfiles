@@ -63,3 +63,6 @@ cache
 tmp
 bundles
 plugged
+# 本地验证工具和临时数据
+.tmp-chezmoi/
+nvim.log

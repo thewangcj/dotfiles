@@ -80,4 +80,6 @@ telescope.setup({
   },
 })
 -- 加载 aerial 扩展
-telescope.load_extension("aerial")
+if vim.g.enable_lsp or vim.g.enable_treesitter then
+  telescope.load_extension("aerial")
+end

@@ -1,7 +1,7 @@
 -- ============================================================
 -- 符号大纲 - aerial.nvim
 --
--- 使用 treesitter 后端解析符号，无需 LSP 或 ctags
+-- 仅使用已开启的 LSP 或 Tree-sitter 后端解析符号。
 --
 -- 快捷键：
 --   <Leader>a   打开/关闭符号大纲侧边栏
@@ -13,9 +13,14 @@
 --   <C-v>    垂直分屏跳转
 -- ============================================================
 
+local backends = {}
+if vim.g.enable_lsp then table.insert(backends, "lsp") end
+if vim.g.enable_treesitter then table.insert(backends, "treesitter") end
+if #backends == 0 then return end
+
 require("aerial").setup({
-  -- 后端优先级：LSP > treesitter（LSP 关闭时自动回退到 treesitter）
-  backends = vim.g.enable_lsp and { "lsp", "treesitter" } or { "treesitter" },
+  -- 后端优先级：LSP > Tree-sitter，关闭的后端不会启用。
+  backends = backends,
 
   -- 大纲侧边栏配置
   float = {

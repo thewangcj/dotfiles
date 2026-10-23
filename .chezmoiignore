@@ -1,0 +1,19 @@
+# 原始配置由部署模板引用，不直接复制到用户目录。
+nvim-config
+vim-config
+zsh-config
+README.md
+docs
+scripts
+git_config.sh
+nvim.log
+{{ if eq .chezmoi.os "windows" }}
+.config
+.vimrc
+.zshrc
+.tmux.conf
+{{ else }}
+AppData
+_vimrc
+_vsvimrc
+{{ end }}

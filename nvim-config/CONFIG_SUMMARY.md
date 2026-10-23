@@ -2,6 +2,8 @@
 
 ## 环境信息
 
+LSP 默认关闭，适用于公司电脑的第三方程序白名单限制。需要启用时，先确认语言服务器已获准运行并安装，再将 `init.lua` 中的 `vim.g.enable_lsp` 改为 `true`，应用配置并重启 Neovim。
+
 | 项目 | 值 |
 |------|-----|
 | Neovim 版本 | 0.12+ |
@@ -170,7 +172,9 @@ Leader 键 = `空格`
 
 ## Tree-sitter 解析器
 
-首次启动安装后，以下语言的语法解析器会自动安装：
+Tree-sitter 默认关闭，使用内置语法高亮，不加载解析器管理插件。需要时将 `init.lua` 中的 `vim.g.enable_treesitter` 改为 `true`，应用配置并重启，再用 `<Leader>tp` 手动管理解析器。LSP 和 Tree-sitter 均关闭时，符号大纲和符号搜索也不启用。
+
+可按需要安装以下语言的解析器：
 
 - **C/C++**：`c`, `cpp`, `cmake`, `make`
 - **Python**：`python`
@@ -189,9 +193,9 @@ Leader 键 = `空格`
 - [nvim-treesitter 仓库](https://github.com/nvim-treesitter/nvim-treesitter)
 
 ## 必要工具
-- tree-sitter-cli：用于编译语言高亮 parser, 直接在 https://github.com/tree-sitter/tree-sitter 下载即可
+- tree-sitter-cli（可选）：启用 Tree-sitter 后用于编译解析器，可从 https://github.com/tree-sitter/tree-sitter 下载
 - ripgrep: 直接在 https://github.com/BurntSushi/ripgrep 下载即可
-- gcc: 编译 parser 时需要，使用 mingw 即可
-- clangd：C++ lsp 使用，用 vs 安装即可
+- gcc（可选）：编译解析器时需要，Windows 可使用 MinGW
+- clangd（可选）：启用 C++ LSP 时需要
 - git: 安装插件时需要
 - im-select.exe 用于自动切换输入法，直接在 https://github.com/daipeihust/im-select/tree/master/win/out/x64 里下载然后添加到环境变量
